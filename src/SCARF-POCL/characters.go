@@ -52,17 +52,43 @@ func (this *Character) hasState(required string) bool {
 	return false
 }
 
-func NewCharacterList(file string) (characters []Character, flaws []Flaws, endStep CausalLink) {
+// Generates an error of traits
+func getTraits(rawTraits string) []string  {
+	// There are spaces in csv file
+	// Get rid of them
+	var traits []string
+	for _,each := range strings.Split(strings.Trim(rawTraits, " "), ";") {
+		traits = append(traits, each)
+	}
+	return traits
+}
+
+func NewCharacterList(file string) (characters []Character, flaws []Flaw) {
 	rawCSVdata, err := ReadCSV(file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, each := range rawCSVdata {
-		characters = append(characters, Character{name: each[0], intentions: []string{each[1]}, states: []string{each[2]}})
+		currentTraits := getTraits(each[1])
+		character := Character{name: each[0], trait: currentTraits}
+		desiredTraits := getTraits(each[2])
+
+		characters = append(characters, character)
+
+		// TODO: This solution is not good -> change
+		// TODO: What if trait exists for final state, but not represented in initial state?
+		for _, desiredTrait := range desiredTraits{
+			desiredTraitInfo := strings.Split(desiredTrait, ":")
+			for _,currentTrait := range currentTraits{
+				currentTraitInfo := strings.Split(currentTrait, ":")
+				if (desiredTraitInfo[0] == currentTraitInfo[0] && desiredTraitInfo[1] != currentTraitInfo[1]){
+					flaws = append(flaws, Flaw{flaw: desiredTraitInfo})
+				}
+			}
+		}
 	}
-	
-	// TODO: Create a list of characters with traits (fields Name, Start)
+
 	// TODO: Create a CausalLink (end step) and flaws, with those traits and end step as origin
 
 	return characters, flaws
