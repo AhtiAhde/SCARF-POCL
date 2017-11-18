@@ -1,7 +1,10 @@
 package main
 
 import(
-    "strings"    
+    "strings"
+    "os"  
+    "encoding/csv"
+    //"fmt"  
 )
 
 type Action struct {
@@ -23,5 +26,26 @@ func (this *Action) hasConsent(character Character) bool {
 
 func NewActionList(path string) ([]Action) {
     var actions []Action
+
+    f, err := os.Open(path)
+    if err != nil {
+        return nil
+    }
+
+    defer f.Close() // this needs to be after the err check
+
+    lines, err := csv.NewReader(f).ReadAll()
+    if err != nil {
+        return nil
+    }
+
+    var new_action Action
+    for _, value := range lines {
+        new_action = Action{name: value[0], transformation: value[1], preconditions: value[2], input: value[3]}
+        actions = append(actions, new_action)
+
+    }
+
+    //fmt.Printf("%v\n", actions)
     return actions
 }
