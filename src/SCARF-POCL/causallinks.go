@@ -3,11 +3,12 @@ package main
 import(
 )
 
+type Flaw struct {
+    flaw string
+    origin CausalLink
+}
+
 type CausalLink struct {
-    flawResolution string
-    internalFlaws []Flaws
-    previousLinks []CausalLink
-    executedLink *CausalLink // must be nillable
-    internalLinks []CausalLink
-    //utility []ActionCharacterPairsOrSomething
+    flawResolution Flaw
+    action Action
 }

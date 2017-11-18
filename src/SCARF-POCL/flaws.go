@@ -2,8 +2,9 @@ package main
 
 import(
 )
-type Flaws struct {
-    flaws []string
+type Flaw struct {
+    flaw string
+    origin CausalLink
 }
 
 /*func (this *Flaws) attemptToResolve() *Sequence {

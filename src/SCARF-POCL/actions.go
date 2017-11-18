@@ -8,7 +8,7 @@ type Action struct {
     name string
     transformation string
     preconditions string
-    input string
+    characters []Character
 }
 
 func (this *Action) hasConsent(character Character) bool {
