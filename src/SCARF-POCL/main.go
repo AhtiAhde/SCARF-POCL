@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt",
-	"os",
-	"strings"
+	"fmt"
+	//"os"
+	//"strings"
 )
 
 func main() {
-    os.Args[1]
+    //os.Args[1]
 	fmt.Println("Hello World!")
 
-    	
+    generator := NewGenerator()
+    generator = generator
 	// Initialization
 	// -Load characters, keyframe A and B, actions
 	// -Parse initial flaw and efficient searchable action map
@@ -29,5 +30,3 @@ func main() {
 	// the dramatic CausalLinkPath can be enriched with more dramatic
 	// CausalLinks; merely by using conflicting intensions and SCARF.
 }
-
-func populateCharacters
