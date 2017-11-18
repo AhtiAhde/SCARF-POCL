@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/csv"
-	//	"fmt"
+	//"fmt"
 	"log"
 	"os"
 	"strings"
@@ -54,9 +54,8 @@ func (this *Character) hasState(required string) bool {
 
 func NewCharacterList(file string) (characters []Character, flaws []Flaws) {
 	//characters, err := os.Open(file)
-	//characters, err = ReadCSV("characters.csv")
 
-	rawCSVdata, err := ReadCSV("characters.csv")
+	rawCSVdata, err := ReadCSV(file)
 	if err != nil {
 		log.Fatal(err)
 	}

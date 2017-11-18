@@ -1,20 +1,19 @@
 package main
 
-import(
-)
+import ()
 
 type Generator struct {
-    characters  []Character
-    actions     []Action
-    flaws       []Flaws
-    causalLinks []CausalLink
+	characters  []Character
+	actions     []Action
+	flaws       []Flaws
+	causalLinks []CausalLink
 }
 
 func NewGenerator() (new Generator) {
-    path := "/data"
+	path := "data"
 	//var err error
-	characters, flaws := NewCharacterList(path + "characters.csv")
-	actions := NewActionList(path + "actions.csv")
+	characters, flaws := NewCharacterList(path + "/characters.csv")
+	actions := NewActionList(path + "/actions.csv")
 	var causalLinks []CausalLink
 	return Generator{characters, actions, flaws, causalLinks}
 }
