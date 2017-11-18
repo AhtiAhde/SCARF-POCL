@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// TODO: This might be wrong
 func (this *Action) ResolvesGoal(characterTrait string) bool {
     
 }
