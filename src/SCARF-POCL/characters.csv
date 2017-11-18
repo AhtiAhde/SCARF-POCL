@@ -1,0 +1,14 @@
+Name,Start,End
+Commander William,william:health:alive; commander:militiaA; location:riversideA,location:riversideB; alive
+Pikeman Rodrig,rodrig:health:alive; location:riversideA; soldier:militiaA; has:pike,rodrig:health:alive
+Dire Wolf,direwolf:health:alive; location:riversideB; wolf,direwolf:health:alive
+Dire Wolf Puppy,direwolf_puppy:health:alive; location:riversideB,direwolf_puppy:health:alive
+Bandit Group,bandit_group:health:alive; group ,bandit_group:health:alive
+slave group,slave_group:health:alive; group; location:town ,slave_group:health:alive
+assault troops,assault_troops:health:alive; group; location:riversideA; soldier:militiaA; has:pike,
+Fate,,Dire Wolf-not-at-riversideB
+Yezzan,yezzan:health:alive; master; location:town ,
+Godo,godo:health:alive; slave; location:town; loves(King),
+Veal,veal:health:alive; slave; location:town; has:grudge(Yezza),
+Butah,butah:health:alive; soldier:militiaB; has:pike ,king:health:dead
+king of the town,king:health:alive; commander:town ,
