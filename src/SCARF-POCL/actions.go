@@ -9,9 +9,12 @@ import(
 
 type Action struct {
     name string
-    transformation string
-    preconditions string
-    characters []Character
+    transformations []string
+    preconditions []string
+}
+
+func (this *Action) isResolverOf(trait string) {
+    
 }
 
 func (this *Action) hasConsent(character Character) bool {
