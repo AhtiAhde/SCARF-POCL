@@ -1,28 +1,28 @@
 package main
 
 import (
-	"math/rand"
+//"math/rand"
 )
 
 type Generator struct {
 	characters []Character
 	allActions []Action
-	flaws      []Flaw
+	endStep    CausalLink
 	//plans           []Plan
 }
 
 func (this *Generator) resolveFlaw() {
-	flaw := this.flaws[rand.Intn(len(this.flaws))-1]
-	causalLink := flaw.resolve(this.allActions, this.characters)
-	causalLink = causalLink
+	//flaw := this.flaws[rand.Intn(len(this.flaws))-1]
+	//causalLink := flaw.resolve(this.allActions, this.characters)
+	//causalLink = causalLink
 }
 
 func NewGenerator() (new Generator) {
 	path := "data"
 	//var err error
-	characters, flaws, endStep := NewCharacterList(path + "/characters.csv")
+	characters, endStep := NewCharacterList(path + "/characters.csv")
 	endStep = endStep
 	actions := NewActionList(path + "/actions.csv")
 	//var plans []Plan
-	return Generator{characters, actions, flaws} //, plans}
+	return Generator{characters, actions, endStep} //, plans}
 }
