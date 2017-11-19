@@ -5,13 +5,13 @@ import (
 	//"fmt"
 	"log"
 	"os"
-	"strings"
+	//"strings"
 )
 
 type Character struct {
-	name       string
+	name string
 	// intentions []string
-	trait     []string
+	traits string
 }
 
 func ReadCSV(filepath string) ([][]string, error) {
@@ -28,7 +28,7 @@ func ReadCSV(filepath string) ([][]string, error) {
 	return fields, nil
 }
 
-func (this *Character) consentCheck(action Action) bool {
+/*func (this *Character) consentCheck(action Action) bool {
 	for _, precondition := range strings.Split(action.preconditions, ";") {
 		// @TODO Add management of AND / OR logic
 
@@ -51,19 +51,20 @@ func (this *Character) hasState(required string) bool {
 	}
 	return false
 }
-
-func NewCharacterList(file string) (characters []Character, flaws []Flaws, endStep CausalLink) {
+*/
+func NewCharacterList(file string) (characters []Character, flaws []Flaw, endStep CausalLink) {
 	rawCSVdata, err := ReadCSV(file)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, each := range rawCSVdata {
-		characters = append(characters, Character{name: each[0], intentions: []string{each[1]}, states: []string{each[2]}})
+		characters = append(characters, Character{name: each[0], traits: each[2]})
 	}
-	
+
 	// TODO: Create a list of characters with traits (fields Name, Start)
 	// TODO: Create a CausalLink (end step) and flaws, with those traits and end step as origin
 
-	return characters, flaws
+	//var endStep CausalLink
+	return characters, flaws, endStep
 }
