@@ -71,9 +71,14 @@ func NewCharacterList(file string) (characters []Character, endStep CausalLink) 
 	}
 
 	var endPreconditions []string
-	for _, each := range rawCSVdata {
+	for key, each := range rawCSVdata {
+		if key == 0 {
+			continue
+		}
 		characters = append(characters, Character{name: each[0], traits: each[1]})
-		endPreconditions = append(endPreconditions, each[0]+":"+each[2])
+		if each[2] != "" {
+			endPreconditions = append(endPreconditions, each[0]+":"+each[2])
+		}
 	}
 	// TODO: This solution is not good -> change
 	// TODO: What if trait exists for final state, but not represented in initial state?

@@ -1,0 +1,3 @@
+Name,Start,End
+Young Space Cadet,health:alive; location:space_bar,health:dead
+Space Ork,has:weapon:plasma_rifle;health:alive;location:space_bar,

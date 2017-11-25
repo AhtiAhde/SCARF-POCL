@@ -1,7 +1,8 @@
 package main
 
 import (
-//"math/rand"
+	//"math/rand"
+	"fmt"
 )
 
 type Generator struct {
@@ -20,9 +21,10 @@ func (this *Generator) resolveFlaw() {
 func NewGenerator() (new Generator) {
 	path := "data"
 	//var err error
-	characters, endStep := NewCharacterList(path + "/characters.csv")
+	characters, endStep := NewCharacterList(path + "/POCL-fodder-Characters.csv")
 	endStep = endStep
-	actions := NewActionList(path + "/actions.csv")
+	actions := NewActionList(path + "/POCL-fodder-Actions.csv")
 	//var plans []Plan
+	fmt.Printf("%+v\n", endStep)
 	return Generator{characters, actions, endStep} //, plans}
 }

@@ -52,7 +52,11 @@ func NewActionList(path string) []Action {
 	}
 
 	var new_action Action
-	for _, value := range lines {
+	for key, value := range lines {
+		if key == 0 {
+			continue
+		}
+
 		new_action = Action{name: value[0], transformations: value[1], preconditions: value[2]}
 		actions = append(actions, new_action)
 
