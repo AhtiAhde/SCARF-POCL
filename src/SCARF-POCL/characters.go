@@ -80,19 +80,7 @@ func NewCharacterList(file string) (characters []Character, endStep CausalLink) 
 			endPreconditions = append(endPreconditions, each[0]+":"+each[2])
 		}
 	}
-	// TODO: This solution is not good -> change
-	// TODO: What if trait exists for final state, but not represented in initial state?
-	/*
-		for _, desiredTrait := range desiredTraits {
-			desiredTraitInfo := strings.Split(desiredTrait, ":")
-			for _, currentTrait := range currentTraits {
-				currentTraitInfo := strings.Split(currentTrait, ":")
-				if desiredTraitInfo[0] == currentTraitInfo[0] && desiredTraitInfo[1] != currentTraitInfo[1] {
-					flaws = append(flaws, Flaw{flaw: desiredTraitInfo})
-				}
-			}
-		}
-	*/
+
 	keyframeAction := Action{"THE END", "", strings.Join(endPreconditions, ";")}
 	endStep = CausalLink{nil, keyframeAction}
 	return characters, endStep

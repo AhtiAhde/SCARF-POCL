@@ -1,30 +1,39 @@
 package main
 
 import (
-	//"math/rand"
 	"fmt"
+	"math/rand"
 )
 
 type Generator struct {
-	characters []Character
-	allActions []Action
-	endStep    CausalLink
-	//plans           []Plan
+	characters  []Character
+	allActions  []Action
+	flaws       []Flaw
+	causalLinks []CausalLink
 }
 
 func (this *Generator) resolveFlaw() {
-	//flaw := this.flaws[rand.Intn(len(this.flaws))-1]
-	//causalLink := flaw.resolve(this.allActions, this.characters)
-	//causalLink = causalLink
+	randomIndex := rand.Intn(len(this.flaws))
+	flaw := this.flaws[randomIndex]
+	causalLink := flaw.resolve(this.allActions, this.characters)
+
+	var notFound CausalLink
+	if *causalLink != notFound {
+		this.flaws = append(this.flaws[:randomIndex], this.flaws[randomIndex+1:]...)
+		this.flaws = append(this.flaws, causalLink.getFlaws()...)
+		this.causalLinks = append(this.causalLinks, *causalLink)
+	}
+
+	fmt.Printf("%+v\n", causalLink)
 }
 
 func NewGenerator() (new Generator) {
 	path := "data"
 	//var err error
 	characters, endStep := NewCharacterList(path + "/POCL-fodder-Characters.csv")
-	endStep = endStep
+
 	actions := NewActionList(path + "/POCL-fodder-Actions.csv")
-	//var plans []Plan
-	fmt.Printf("%+v\n", endStep)
-	return Generator{characters, actions, endStep} //, plans}
+	// fmt.Printf("%+v\n", actions)
+	var causalLinks []CausalLink
+	return Generator{characters, actions, endStep.getFlaws(), append(causalLinks, endStep)} //, plans}
 }

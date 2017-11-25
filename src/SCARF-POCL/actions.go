@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/csv"
+	"fmt"
 	"os"
 	"strings"
-	//"fmt"
 )
 
 type Action struct {
@@ -13,8 +13,16 @@ type Action struct {
 	preconditions   string
 }
 
+func (this *Action) getPrecondtions() (preconditions []string) {
+	for _, precondition := range strings.Split(this.preconditions, ";") {
+		preconditions = append(preconditions, precondition)
+	}
+	return preconditions
+}
+
 func (this *Action) isResolverOf(trait string) bool {
 	for _, transformation := range strings.Split(this.transformations, ";") {
+		fmt.Printf(trait + "-" + transformation)
 		transformationParts := strings.Split(transformation, ":")
 		transformationTrait := strings.Join(transformationParts[1:], ":")
 		if trait == transformationTrait {
@@ -23,6 +31,8 @@ func (this *Action) isResolverOf(trait string) bool {
 	}
 	return false
 }
+
+//func (this *Action) getPrecondtions
 
 /* Obsolete?
 func (this *Action) hasConsent(character Character) bool {
@@ -57,7 +67,7 @@ func NewActionList(path string) []Action {
 			continue
 		}
 
-		new_action = Action{name: value[0], transformations: value[1], preconditions: value[2]}
+		new_action = Action{name: value[0], transformations: value[2], preconditions: value[1]}
 		actions = append(actions, new_action)
 
 	}
