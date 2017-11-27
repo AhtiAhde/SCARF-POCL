@@ -12,7 +12,9 @@ func main() {
 
 	generator := NewGenerator()
 	generator.resolveFlaw()
-	fmt.Printf("%+v\n", generator)
+	generator.resolveFlaw()
+	// fmt.Printf("%+v\n", generator)
+
 	// Initialization
 	// -Load characters, keyframe A and B, actions
 	// -Parse initial flaw and efficient searchable action map

@@ -24,7 +24,7 @@ func (this *Generator) resolveFlaw() {
 		this.causalLinks = append(this.causalLinks, *causalLink)
 	}
 
-	fmt.Printf("%+v\n", causalLink)
+	fmt.Printf("\nFlaw resolved: \n%+v\n\nGenerated:\n%+v\n", flaw, causalLink)
 }
 
 func NewGenerator() (new Generator) {

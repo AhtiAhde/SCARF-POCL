@@ -14,6 +14,19 @@ type Character struct {
 	traits string
 }
 
+func (this *Character) hasTrait(testTrait string) bool {
+	for _, charTrait := range strings.Split(this.traits, ";") {
+		if charTrait == testTrait {
+			return true
+		}
+	}
+	return false
+}
+
+func (this *Character) getName() string {
+	return this.name
+}
+
 func ReadCSV(filepath string) ([][]string, error) {
 	csvfile, err := os.Open(filepath)
 

@@ -22,29 +22,58 @@ func (this *Action) getPrecondtions() (preconditions []string) {
 
 func (this *Action) isResolverOf(trait string) bool {
 	for _, transformation := range strings.Split(this.transformations, ";") {
-		fmt.Printf(trait + "-" + transformation)
 		transformationParts := strings.Split(transformation, ":")
 		transformationTrait := strings.Join(transformationParts[1:], ":")
+		if strings.Contains(trait, transformationTrait) {
+			return true
+		}
+	}
+	return false
+}
+
+/**
+ * For now we bind only for two characters; subject and object
+ * This is very likely to be refactored
+ */
+func (this *Action) bindCharacters(character string, trait string, characters []Character) {
+	this.resolveTargetCharacter(character, trait)
+
+}
+
+func (this *Action) resolveTargetCharacter(character string, trait string) {
+	for _, transformation := range strings.Split(this.transformations, ";") {
+		transformationParts := strings.Split(transformation, ":")
+		transformationTrait := strings.Join(transformationParts[1:], ":")
+		transformationChar := transformationParts[0]
+
 		if trait == transformationTrait {
-			return true
+			this.bindToCharacter(transformationChar, character)
+			break
 		}
 	}
-	return false
 }
 
-//func (this *Action) getPrecondtions
+func (this *Action) resolveOtherCharacters(characters []Character) {
+	for _, transformation := range strings.Split(this.transformations, ";") {
+		transformationParts := strings.Split(transformation, ":")
+		transformationTrait := strings.Join(transformationParts[1:], ":")
+		transformationChar := transformationParts[0]
 
-/* Obsolete?
-func (this *Action) hasConsent(character Character) bool {
-	for _, precondition := range strings.Split(this.preconditions, ";") {
-		condition := strings.Split(precondition, ":")[1]
-		if character.hasState(condition) {
-			return true
+		for _, character := range characters {
+			if character.hasTrait(transformationTrait) {
+				this.bindToCharacter(transformationChar, character.getName())
+				break
+				// How to signal handled transformations and preconditions
+			}
 		}
 	}
-	return false
 }
-*/
+
+func (this *Action) bindToCharacter(label string, character string) {
+	fmt.Println("Binding Transformations to " + character + " for label " + label)
+	this.transformations = strings.Replace(this.transformations, label+":", character+":", -1)
+	this.preconditions = strings.Replace(this.preconditions, label+":", character+":", -1)
+}
 
 func NewActionList(path string) []Action {
 	var actions []Action

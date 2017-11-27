@@ -20,14 +20,15 @@ func (this *Flaw) resolve(allActions []Action, characters []Character) (causalLi
 	var nextPossibleActions []Action
 	for _, action := range allActions {
 		if action.isResolverOf(trait) {
-			nextPossibleActions = append(nextPossibleActions, action)
+			nextPossibleActions = append(nextPossibleActions, Action(action))
 		}
 	}
-	fmt.Printf("%+v\n", nextPossibleActions)
+	fmt.Printf("Possible action: %+v\n", nextPossibleActions)
 	if len(nextPossibleActions) > 0 {
 		length := len(nextPossibleActions)
 		fmt.Printf("%v\n", length)
 		nextAction := nextPossibleActions[rand.Intn(length)]
+		nextAction.bindCharacters(character, trait, characters)
 		return &CausalLink{this, nextAction}
 	}
 	var notFound CausalLink
