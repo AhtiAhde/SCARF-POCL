@@ -1,3 +1,4 @@
 Name,Preconditions,Transformation,Example,
-kill,subject:has:weapon;subject:location=object:location,object:health:dead,Space ork shoots young cadet with plasma rifle,
+kill,subject:has:weapon;subject:location:space_bar,object:health:dead,Space ork shoots young cadet with plasma rifle,
 kill:shootout,has:weapon:plasma_rifle,apply:kill(),,
+moveToSpaceBar,,subject:location:space_bar,,
